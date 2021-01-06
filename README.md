@@ -1,0 +1,2 @@
+# xyztile_polygon_postgis
+PostGISでEPSG:3857のxyzタイル境界のポリゴンデータを作成するSQLプログラム
