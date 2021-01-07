@@ -22,17 +22,17 @@ DECLARE
  xr numeric;
  yt numeric;
  yb numeric;
- maxxynum integer := 2^zoom -1;
+ maxxynum integer := 2^zoom - 1;
  maxxyval numeric := 6378137 * pi();
- tilelength numeric := maxxyval / (2^(zoom -1));
+ tilelength numeric := maxxyval / (2^(zoom - 1));
 BEGIN
  for i in 0..maxxynum loop
   xl := (-1) * maxxyval + tilelength * i;
-  xr := (-1) * maxxyval + tilelength * (i + 1);
+  xr := xl + tilelength;
  
   for j in 0..maxxynum loop
     yt :=  maxxyval - tilelength * j;
-    yb :=  maxxyval - tilelength * (j + 1);
+    yb :=  yt - tilelength;
      INSERT into xyztile_polygon values(ST_GeomFromText('POLYGON((' || xl || ' ' || yt || ',' || xl || ' ' || yb || ',' || xr || ' ' || yb || ',' || xr || ' ' || yt || ',' || xl || ' ' || yt || '))',3857),i,j,zoom);
   end loop;
  end loop;
